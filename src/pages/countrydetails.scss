@@ -1,0 +1,19 @@
+.detail-body{
+    display: flex;
+    flex-direction: column;
+}
+.btn-primary{
+    margin:5px;
+    padding: 5px 10px;
+}
+.card-image {
+    max-height: 400px;
+    max-width: 450px;
+
+    img {
+        min-height: 100%;
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+}
