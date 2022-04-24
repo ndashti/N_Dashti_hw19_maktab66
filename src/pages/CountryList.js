@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-
+import React, { useState, useEffect,useContext } from "react";
+// import { useSearchParams } from "react-router-dom";
+import { ThemeContext } from '../context/themeContext'
 import Header from "../components/Header";
 import Countries from "../components/Countries";
 
@@ -13,15 +13,16 @@ export default function CountryList() {
   const [q, setQ] = useState("");
   const [searchParam] = useState(["capital", "name", "numericCode"]);
   const [filterParam, setFilterParam] = useState("All");
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     fetch("https://restcountries.com/v2/all")
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          console.log(result);
-          setIsLoaded(true);
-          setItems(result);
+    .then((res) => res.json())
+    .then(
+      (result) => {
+        console.log(result);
+        setIsLoaded(true);
+        setItems(result);
         },
         (error) => {
           setIsLoaded(true);
@@ -30,6 +31,7 @@ export default function CountryList() {
       );
   }, []);
 
+
   function search(items) {
     console.log(filterParam);
     console.log("q", q);
@@ -37,13 +39,15 @@ export default function CountryList() {
       if (item.region === filterParam) {
         return searchParam.some((newItem) => {
           return (
-            item[newItem]?.toString().toLowerCase().indexOf(q.toLowerCase()) > -1 
+            item[newItem]?.toString().toLowerCase().indexOf(q.toLowerCase()) >
+            -1
           );
         });
       } else if (filterParam === "All") {
         return searchParam.some((newItem) => {
           return (
-            item[newItem]?.toString().toLowerCase().indexOf(q.toLowerCase()) > -1 
+            item[newItem]?.toString().toLowerCase().indexOf(q.toLowerCase()) >
+            -1
           );
         });
       }
@@ -56,7 +60,8 @@ export default function CountryList() {
     return <>loading...</>;
   } else {
     return (
-      <div className="wrapper">
+      <div  className={`wrapper ${theme}`}>
+        <Header />
         <div className="search-wrapper">
           <label htmlFor="search-form">
             <input
@@ -89,6 +94,7 @@ export default function CountryList() {
             <span className="focus"></span>
           </div>
         </div>
+
         <ul className="card-grid">
           {search(items).map((country) => (
             <Countries key={country.name} country={country} />

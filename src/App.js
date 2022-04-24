@@ -5,6 +5,8 @@ import CountryDetails from "./pages/CountryDetails";
 import CountryList from "./pages/CountryList";
 
 function App() {
+
+
   return (
     <BrowserRouter>
       <Routes>
@@ -16,8 +18,3 @@ function App() {
 }
 
 export default App;
-{
-  /* <Route path="/" element={<CountryList />}>
-<Route path="/:nameCounty" element={<CountryDetails />} />
-</Route> */
-}

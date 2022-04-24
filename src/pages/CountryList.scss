@@ -20,13 +20,33 @@
 img {
     width: 100%;
 }
-:root {
+.dark {
+  
+    --bg:  hsl(200, 15%, 8%);
+    --bg-offset:  hsl(0, 0%, 52%);
+    --text: hsl(0, 3%, 74%);
+    --gray: hsl(0, 0%, 52%);
+    --border: C
+  }
+  
+  .light {
+
     --bg: hsl(0, 0%, 98%);
     --bg-offset: hsl(0, 0%, 100%);
     --text: hsl(200, 15%, 8%);
     --gray: hsl(0, 0%, 52%);
     --border: rgba(0, 0, 0, 0.1);
-}
+  }
+  
+// :root {
+//     --bg: hsl(0, 0%, 98%);
+//     --bg-offset: hsl(0, 0%, 100%);
+//     --text: hsl(200, 15%, 8%);
+//     --gray: hsl(0, 0%, 52%);
+//     --border: rgba(0, 0, 0, 0.1);
+// }
+
+
 ul,
 ol {
     list-style: none;
@@ -40,7 +60,7 @@ body {
 }
 h1,
 h2 {
-    heigh: 18px;
+    height: 18px;
 }
 .wrapper {
     width: 96%;

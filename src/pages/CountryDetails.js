@@ -1,12 +1,19 @@
-import React, { useState } from "react";
-import { Link, Navigate, useLocation } from "react-router-dom";
+import React, { useState,useContext } from "react";
+import { Link, useLocation } from "react-router-dom";
 import Header from "../components/Header";
 import axios from "axios";
+
+import { ThemeContext } from '../context/themeContext'
+
 import "./countrydetails.scss";
+
+
 export default function CountryDetails() {
   let location = useLocation();
   const [data,setData]=useState();
   const [country,setCountry]=useState(location.state)
+
+  const { theme } = useContext(ThemeContext);
 
   const handleBorder=(bo)=>{
     axios
@@ -20,57 +27,49 @@ export default function CountryDetails() {
   return (
     <>
       <Header />
+      <div className={`${theme}`}>
       <div>
         <Link to="/">
           <button>Back</button>
         </Link>
       </div>
-      <div className="card-image">
+      <div className="card-image-detail">
+        <div>
         <img  src={country.flags.png} alt="flag" />
+        </div>
         <div>
           <h2>{country.name}</h2>
-          <div>
-            <span>Native Name :</span>
-            <span>{location.state.nativeName}</span>
-          </div>
-          <div>
-            <span>Population :</span>
-            <span>{country.population}</span>
-          </div>
-          <div>
-            <span>Region :</span>
-            <span>{country.region}</span>
-          </div>
-          <div>
-            <span>Sub Region :</span>
-            <span>{country.subregion}</span>
-          </div>
-          <div>
-            <span>Capital :</span>
-            <span>{country.capital}</span>
-          </div>
-        </div>
+            <p>Native Name : <span>{location.state.nativeName}</span></p>
+            
+            <p>Population :<span>{country.population}</span></p>
+            
+            <p>Region :<span>{country.region}</span></p>
+            
+
+            <p>Sub Region :<span>{country.subregion}</span></p>
+            
+ 
+            <p>Capital :<span>{country.capital}</span></p>
+            
+ 
+    
+            <p>Top Level Domain :<span>{country.topLevelDomain[0]}</span></p>
+            
+     
+            <p>Currencies :<span>{country.currencies[0]["name"]}</span></p>
+            
+         
+            <p>Languages :{country.languages.map((lang) => (<span key={lang.name}>{lang.name + "  "}</span>))}</p>
+            
+         
         <div>
-          <div>
-            <span>Top Level Domain :</span>
-            <span>{country.topLevelDomain[0]}</span>
-          </div>
-          <div>
-            <span>Currencies :</span>
-            <span>{country.currencies[0]["name"]}</span>
-          </div>
-          <div>
-            <span>Languages :</span>
-            <span>{console.log(country.languages)}</span>
-          </div>
-        </div>
-        <div>
-          <span>Borders :</span>
+          <p>Borders :</p>
           {country.borders.map((border) => {
             return <button onClick={()=>handleBorder({border})} className="btn-primary">{border}</button>;
           })}
         </div>
-        <div></div>
+        </div>
+      </div>
       </div>
     </>
   );
